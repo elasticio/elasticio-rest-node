@@ -1,3 +1,6 @@
+[![Circle CI](https://circleci.com/gh/elasticio/elasticio-rest-node.svg?style=svg)](https://circleci.com/gh/elasticio/elasticio-rest-node)
+[![Coverage Status](https://coveralls.io/repos/elasticio/elasticio-rest-node/badge.svg?branch=master&service=github)](https://coveralls.io/github/elasticio/elasticio-rest-node?branch=master)
+
 # Installation
 
 ``npm install elasticio-rest-node``
