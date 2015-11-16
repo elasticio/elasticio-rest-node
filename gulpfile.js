@@ -19,8 +19,6 @@ gulp.task('jasmine', function() {
         }));
 });
 
-gulp.task('pre-commit', ['jscs']);
-
 gulp.task('coveralls', ['coverage'], function() {
     gulp.src(paths.coverageReport).pipe(coveralls());
 });
