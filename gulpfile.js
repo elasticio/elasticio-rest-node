@@ -19,12 +19,6 @@ gulp.task('jasmine', function() {
         }));
 });
 
-gulp.task('jscs', function() {
-    return gulp
-        .src(paths.code)
-        .pipe(jscs());
-});
-
 gulp.task('pre-commit', ['jscs']);
 
 gulp.task('coveralls', ['coverage'], function() {
@@ -45,5 +39,5 @@ gulp.task('coverage', function(cb) {
         });
 });
 
-gulp.task('test', ['jscs', 'jasmine']);
+gulp.task('test', ['jasmine']);
 gulp.task('default', ['test']);
