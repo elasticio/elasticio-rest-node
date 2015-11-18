@@ -19,4 +19,35 @@ describe('Basic use cases', function () {
             });
 
     });
+
+    it('should handle status codes properly', function (done) {
+
+        var response = {
+            "error":"Invalid username or secret provided."
+        };
+
+        nock('https://api.elastic.io')
+            .get('/v1/users/')
+            .reply(401, response);
+
+        var result;
+        var error;
+
+        users
+            .me()
+            .then(function (body) {
+                result = body;
+            })
+            .fail(function(e){
+                error = e;
+            })
+            .finally(function () {
+                expect(result).toBeUndefined();
+                expect(error).toBeDefined();
+                expect(error.message).toEqual('{"error":"Invalid username or secret provided."}');
+
+                done();
+            });
+
+    });
 });

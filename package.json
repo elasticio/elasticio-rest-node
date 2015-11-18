@@ -1,7 +1,7 @@
 {
     "name": "elasticio-rest-node",
     "description": "elastic.io REST API client",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "author": "elastic.io GmbH <info@elastic.io>",
     "engine": "node >=4.1.0",
     "scripts": {
