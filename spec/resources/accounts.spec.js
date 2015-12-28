@@ -123,4 +123,47 @@ describe('/accounts', function () {
 
         });
     });
+
+    describe('/create', function () {
+
+        it('should send request successfully', function (done) {
+
+            var input = {
+                "name": "New account name"
+            };
+
+            var response = {
+                "id": "55083c567aea6f030000001a",
+                "name": "New account name",
+                "type": "dropbox",
+                "keys": {
+                    "oauth": {
+                        "key": "some key"
+                    }
+                }
+            };
+
+            nock('https://api.elastic.io')
+                .post('/v1/accounts/', input)
+                .basicAuth({
+                    user: 'root',
+                    pass: 'secret'
+                })
+                .reply(200, response);
+
+            var result;
+
+            accounts
+                .create(input)
+                .then(function (body) {
+                    result = body;
+                })
+                .finally(function () {
+                    expect(result).toEqual(response);
+
+                    done();
+                });
+
+        });
+    });
 });
