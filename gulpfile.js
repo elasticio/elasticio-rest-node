@@ -23,8 +23,8 @@ gulp.task('coveralls', ['coverage'], function() {
     return gulp.src(paths.coverageReport).pipe(coveralls());
 });
 
-gulp.task('coverage', function() {
-    return gulp
+gulp.task('coverage', function(cb) {
+    gulp
         .src(paths.code)
         .pipe(istanbul()) // Covering files
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
@@ -32,7 +32,8 @@ gulp.task('coverage', function() {
             gulp
                 .src(paths.spec)
                 .pipe(jasmine())
-                .pipe(istanbul.writeReports()); // Creating the reports after tests runned
+                .pipe(istanbul.writeReports())
+                .on('end', cb);
         });
 });
 
