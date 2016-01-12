@@ -133,6 +133,7 @@ describe('Basic use cases', function () {
                 expect(result).toBeUndefined();
                 expect(error).toBeDefined();
                 expect(error.message).toEqual('{"error":"Invalid username or secret provided."}');
+                expect(error.statusCode).toEqual(402);
 
                 done();
             });
