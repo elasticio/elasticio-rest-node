@@ -5,7 +5,7 @@
     "author": "elastic.io GmbH <info@elastic.io>",
     "engine": "node >=4.1.0",
     "scripts": {
-        "test": "./node_modules/gulp/bin/gulp.js coveralls"
+        "test": "./node_modules/gulp/bin/gulp.js test"
     },
     "main": "./lib/client.js",
     "dependencies": {
