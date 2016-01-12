@@ -10,6 +10,17 @@ var paths = {
     coverageReport: 'coverage/lcov.info'
 };
 
+gulp.task('jscs', function() {
+    return gulp
+        .src([
+            './lib/**/*.js',
+            './spec/**/*.js'
+        ])
+        .pipe(jscs())
+        //.pipe(jscs.reporter())
+        //.pipe(jscs.reporter('fail'));
+});
+
 gulp.task('jasmine', function() {
     return gulp
         .src(paths.spec)
@@ -36,6 +47,8 @@ gulp.task('coverage', function(cb) {
                 .on('end', cb);
         });
 });
+
+gulp.task('pre-commit', ['jscs']);
 
 gulp.task('test', ['jasmine']);
 gulp.task('default', ['test']);
