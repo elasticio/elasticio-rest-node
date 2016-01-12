@@ -133,7 +133,38 @@ describe('Basic use cases', function () {
                 expect(result).toBeUndefined();
                 expect(error).toBeDefined();
                 expect(error.message).toEqual('{"error":"Invalid username or secret provided."}');
-                expect(error.statusCode).toEqual(402);
+                expect(error.statusCode).toEqual(401);
+
+                done();
+            });
+
+    });
+
+    it('should handle string response properly', function (done) {
+
+        var client = require("../../lib/client")("root", "secret");
+
+        nock('https://api.elastic.io')
+            .get('/v1/users/')
+            .reply(401, "Invalid username or secret provided.");
+
+        var result;
+        var error;
+
+        client
+            .users
+            .me()
+            .then(function (body) {
+                result = body;
+            })
+            .fail(function (e) {
+                error = e;
+            })
+            .finally(function () {
+                expect(result).toBeUndefined();
+                expect(error).toBeDefined();
+                expect(error.message).toEqual('Invalid username or secret provided.');
+                expect(error.statusCode).toEqual(401);
 
                 done();
             });
