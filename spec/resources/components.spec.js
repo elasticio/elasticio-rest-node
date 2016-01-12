@@ -79,4 +79,32 @@ describe('/components', function () {
 
         });
     });
+
+    describe('/:id', function () {
+
+        it('should send request successfully', function (done) {
+
+            nock('https://api.elastic.io')
+                .get('/v1/components/123456789')
+                .basicAuth({
+                    user: 'root',
+                    pass: 'secret'
+                })
+                .reply(200, { yeah : 'it works' });
+
+            var result;
+
+            components
+                .retrieve('123456789')
+                .then(function (body) {
+                    result = body;
+                })
+                .finally(function () {
+                    expect(result).toEqual({ yeah : 'it works' });
+                    done();
+                });
+
+        });
+    });
+
 });
