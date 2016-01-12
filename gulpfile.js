@@ -11,7 +11,7 @@ var paths = {
 };
 
 gulp.task('jasmine', function() {
-    gulp
+    return gulp
         .src(paths.spec)
         .pipe(jasmine({
             includeStackTrace: true,
@@ -20,11 +20,11 @@ gulp.task('jasmine', function() {
 });
 
 gulp.task('coveralls', ['coverage'], function() {
-    gulp.src(paths.coverageReport).pipe(coveralls());
+    return gulp.src(paths.coverageReport).pipe(coveralls());
 });
 
-gulp.task('coverage', function(cb) {
-    gulp
+gulp.task('coverage', function() {
+    return gulp
         .src(paths.code)
         .pipe(istanbul()) // Covering files
         .pipe(istanbul.hookRequire()) // Force `require` to return covered files
@@ -32,8 +32,7 @@ gulp.task('coverage', function(cb) {
             gulp
                 .src(paths.spec)
                 .pipe(jasmine())
-                .pipe(istanbul.writeReports()) // Creating the reports after tests runned
-                .on('end', cb);
+                .pipe(istanbul.writeReports()); // Creating the reports after tests runned
         });
 });
 
