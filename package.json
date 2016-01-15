@@ -22,7 +22,7 @@
         "gulp-param": "0.6.3",
         "gulp-jscs": "~1.6.0",
         "git-guppy": "~1.0.0",
-        "code-quality-js": "git+https://github.com/elasticio/code-quality-js.git#master"
+        "code-quality-js": "1.0.2"
     },
     "optionalDependencies": {
         "guppy-pre-commit": "~0.2.1"
