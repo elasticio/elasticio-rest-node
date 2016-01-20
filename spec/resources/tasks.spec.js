@@ -135,4 +135,35 @@ describe('/tasks', function () {
 
         });
     });
+
+    describe('/delete/{id}', function () {
+
+        it('should send request successfully', function (done) {
+
+            var response = {
+                "message" : "Successfully deleted task id=54f4be3fe7d5224f91000001"
+            };
+
+            nock('https://api.elastic.io')
+                .delete('/v1/tasks/54f4be3fe7d5224f91000001')
+                .basicAuth({
+                    user: 'root',
+                    pass: 'secret'
+                })
+                .reply(200, response);
+
+            var result;
+
+            tasks
+                .delete("54f4be3fe7d5224f91000001")
+                .then(function (body) {
+                    result = body;
+                })
+                .finally(function () {
+                    expect(result).toEqual(response);
+                    done();
+                });
+
+        });
+    });
 });
