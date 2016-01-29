@@ -87,3 +87,10 @@ Now post the contents of this file to ``/v1/tasks`` like this:
 ```
 curl -u your-email:your-api-key -H 'Accept: application/json' -H 'Content-Type: application/json' -d @task.json https://api.elastic.io/v1/tasks
 ```
+
+And you'll see the result like this:
+
+```
+{"id":"123456789"}
+```
+
