@@ -85,7 +85,11 @@ As you can see above it's a simple integraiton flow with two components. Don't f
 Now post the contents of this file to ``/v1/tasks`` like this:
 
 ```
-curl -u your-email:your-api-key -H 'Accept: application/json' -H 'Content-Type: application/json' -d @task.json https://api.elastic.io/v1/tasks
+curl -u your-email:your-api-key \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d @task.json \
+  https://api.elastic.io/v1/tasks
 ```
 
 And you'll see the result like this:
@@ -94,3 +98,30 @@ And you'll see the result like this:
 {"id":"123456789"}
 ```
 
+We just created a new task. Now we can start it.
+
+## Start integration flow
+
+Now as we have a Task ID we can easily start it using [start task](http://api.elastic.io/docs/#start-a-task) API:
+
+```
+curl -u your-email:your-api-key \
+  -X POST \
+  https://api.elastic.io/v1/tasks/start/{TASK_ID}
+```
+
+As a response you'll see something like this:
+
+```json
+{
+  "id": "123456789",
+  "status": "active",
+  "message": "Your task has been successfully activated."
+}
+```
+
+## See your integration flow working
+
+
+
+https://www.dropbox.com/s/3u8kqc58b8v24z9/Screenshot%202016-01-30%2012.50.48.png?dl=0
