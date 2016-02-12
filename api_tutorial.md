@@ -8,7 +8,7 @@ You only need a ``curl`` and [elastic.io account](http://www.elastic.io) for tha
 Create new request bin, we'll going to use it in our integration sample to push the data.
 
 ```
-curl -X POST  http://requestb.in/api/v1/bins
+curl -X POST http://requestb.in/api/v1/bins
 ```
 
 you'll ge a response that would looks like this:
@@ -26,7 +26,7 @@ you'll ge a response that would looks like this:
 }
 ```
 
-Remember the ``name`` of your bin. You can also check it's empty now:
+Remember the ``name`` of your bin (``xuhpomxu`` in our sample above). You can also check it's empty now:
 
 ```
 curl http://requestb.in/api/v1/bins/xuhpomxu
@@ -63,6 +63,7 @@ First create a new file called ``task.json`` with following content:
 ```json
 {
   "name": "Embedded Tutorial",
+  "cron": "*/1 * * * *",
   "nodes": [
     {
       "action": "elasticio/timer:timer",
@@ -98,7 +99,7 @@ And you'll see the result like this:
 {"id":"123456789"}
 ```
 
-We just created a new task. Now we can start it.
+We just created a new task with ``id`` 123456789. Now we can start it.
 
 ## Start integration flow
 
@@ -120,8 +121,51 @@ As a response you'll see something like this:
 }
 ```
 
+Your first integration task has just started on elastic.io. Every minute elastic.io platform will trigger an execution of the [timer component](https://github.com/elasticio/timer). Timer component [will emit](https://github.com/elasticio/timer/blob/master/timer.js#L27) a message with the fire time in it, this message will be placed into the output data queue which is in turn connected to the [webhook component](https://github.com/elasticio/webhook) which will POST the body of the message to the configured URL.
+
 ## See your integration flow working
 
+After 10-15 seconds you can check the request bin you created in the first step of this tutorial:
 
+```
+curl http://requestb.in/api/v1/bins/xuhpomxu
+```
+
+
+```json
+{
+  "name": "xuhpomxu",
+  "request_count": 1,
+  "color": [
+    240,
+    220,
+    190
+  ],
+  "private": false
+}
+```
+
+As you can see we have a new request in the bin. You can also open a URL in your browser ``http://requestb.in/your-bin-name?inspect`` to see the visualization statistics like this:
 
 https://www.dropbox.com/s/3u8kqc58b8v24z9/Screenshot%202016-01-30%2012.50.48.png?dl=0
+
+And you can be sure every minute a new request will be posted.
+
+## Stop your integration flow
+
+Don't forget to stop your task so that resources allocated to your account won't be wasted, use the [stop task](http://api.elastic.io/docs/#stop-a-task) API:
+
+```
+curl -u your-email:your-api-key \
+  -X POST \
+  https://api.elastic.io/v1/tasks/stop/{TASK_ID}
+```
+
+As a response you'll see something like this:
+
+```json
+{
+  "id": "123456789",
+  "status": "inactive"
+}
+```
