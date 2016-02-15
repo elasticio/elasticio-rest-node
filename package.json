@@ -5,6 +5,7 @@
     "author": "elastic.io GmbH <info@elastic.io>",
     "engine": "node >=4.1.0",
     "scripts": {
+        "pretest": "./node_modules/gulp/bin/gulp.js jscs",
         "test": "./node_modules/gulp/bin/gulp.js test"
     },
     "main": "./lib/client.js",
@@ -20,7 +21,7 @@
         "gulp-istanbul": "0.6.0",
         "gulp-coveralls": "^0.1.4",
         "gulp-param": "0.6.3",
-        "gulp-jscs": "~1.6.0",
+        "gulp-jscs": "~3.0.2",
         "git-guppy": "~1.0.0",
         "code-quality-js": "1.0.2"
     },

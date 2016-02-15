@@ -14,11 +14,11 @@ gulp.task('jscs', function() {
     return gulp
         .src([
             './lib/**/*.js',
-            './spec/**/*.js'
+            //'./spec/**/*.js'
         ])
         .pipe(jscs())
-        //.pipe(jscs.reporter())
-        //.pipe(jscs.reporter('fail'));
+        .pipe(jscs.reporter())
+        .pipe(jscs.reporter('fail'));
 });
 
 gulp.task('jasmine', function() {
