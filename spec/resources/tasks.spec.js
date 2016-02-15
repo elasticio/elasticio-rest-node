@@ -166,4 +166,30 @@ describe('/tasks', function () {
 
         });
     });
+
+    describe('/{id}/steps', function() {
+        describe('/{stepId}', function() {
+            it('should send request successfully', function (done) {
+                var response = {
+                    'id': 'step_1',
+                    'comp_id': 'comp_1'
+                };
+
+                nock('https://api.elastic.io')
+                    .get('/v1/tasks/54f4be3fe7d5224f91000001/steps/step_1')
+                    .basicAuth({
+                        user: 'root',
+                        pass: 'secret'
+                    })
+                    .reply(200, response);
+
+                tasks.retrieveStep('54f4be3fe7d5224f91000001', 'step_1')
+                    .then(function (result) {
+                        expect(result).toEqual(response);
+                    })
+                    .then(done)
+                    .catch(done.fail);
+            });
+        });
+    });
 });
