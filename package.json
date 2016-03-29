@@ -1,12 +1,12 @@
 {
     "name": "elasticio-rest-node",
     "description": "elastic.io REST API client",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "elastic.io GmbH <info@elastic.io>",
     "engine": "node >=4.1.0",
     "scripts": {
-        "pretest": "./node_modules/gulp/bin/gulp.js jscs",
-        "test": "./node_modules/gulp/bin/gulp.js test"
+        "pretest": "gulp jscs",
+        "test": "gulp test"
     },
     "main": "./lib/client.js",
     "dependencies": {
@@ -22,10 +22,6 @@
         "gulp-coveralls": "^0.1.4",
         "gulp-param": "0.6.3",
         "gulp-jscs": "~3.0.2",
-        "git-guppy": "~1.0.0",
         "code-quality-js": "1.0.2"
-    },
-    "optionalDependencies": {
-        "guppy-pre-commit": "~0.2.1"
     }
 }
