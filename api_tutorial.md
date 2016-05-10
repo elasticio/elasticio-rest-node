@@ -169,3 +169,13 @@ As a response you'll see something like this:
   "status": "inactive"
 }
 ```
+## Delete you integration flow
+
+As a last step to make sure you don't have any left-overs we'll delete the task. To do that we'l use [delete task](https://api.elastic.io/docs/#delete-a-task) API.
+
+```
+curl -u your-email:your-api-key \
+  -X DELETE \
+  https://api.elastic.io/v1/tasks/{TASK_ID}
+```
+
