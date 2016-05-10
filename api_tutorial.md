@@ -41,7 +41,7 @@ API calls to elastic.io api should be authenticated using basic auth where your 
 is a password.
 
 ```
-curl -u your-email:your-api-key https://api.elastic.io/v1/users
+curl -u your-email:your-api-key https://api.elastic.io/v2/users
 ```
 Should return you something like this:
 
@@ -66,15 +66,17 @@ First create a new file called ``task.json`` with following content:
   "cron": "*/1 * * * *",
   "nodes": [
     {
-      "action": "elasticio/timer:timer",
+      "function": "elasticio/timer:timer",
       "config": {
         "interval": "minute"
       }
     },
     {
-      "action": "elasticio/webhook:post",
+      "function": "elasticio/webhook:post",
       "config": {
-        "url": "http://requestb.in/xuhpomxu"
+        "method": "POST",
+        "uri": "http://requestb.in/xuhpomxu",
+        "outputSample": "ignored"
       }
     }
   ]
@@ -90,7 +92,7 @@ curl -u your-email:your-api-key \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d @task.json \
-  https://api.elastic.io/v1/tasks
+  https://api.elastic.io/v2/tasks
 ```
 
 And you'll see the result like this:
@@ -108,7 +110,7 @@ Now as we have a Task ID we can easily start it using [start task](http://api.el
 ```
 curl -u your-email:your-api-key \
   -X POST \
-  https://api.elastic.io/v1/tasks/start/{TASK_ID}
+  https://api.elastic.io/v2/tasks/start/{TASK_ID}
 ```
 
 As a response you'll see something like this:
@@ -128,7 +130,7 @@ Your first integration task has just started on elastic.io. Every minute elastic
 After 10-15 seconds you can check the request bin you created in the first step of this tutorial:
 
 ```
-curl http://requestb.in/api/v1/bins/xuhpomxu
+curl http://requestb.in/api/v2/bins/xuhpomxu
 ```
 
 
@@ -158,7 +160,7 @@ Don't forget to stop your task so that resources allocated to your account won't
 ```
 curl -u your-email:your-api-key \
   -X POST \
-  https://api.elastic.io/v1/tasks/stop/{TASK_ID}
+  https://api.elastic.io/v2/tasks/stop/{TASK_ID}
 ```
 
 As a response you'll see something like this:
@@ -176,6 +178,6 @@ As a last step to make sure you don't have any left-overs we'll delete the task.
 ```
 curl -u your-email:your-api-key \
   -X DELETE \
-  https://api.elastic.io/v1/tasks/{TASK_ID}
+  https://api.elastic.io/v2/tasks/{TASK_ID}
 ```
 
