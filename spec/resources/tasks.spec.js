@@ -69,6 +69,40 @@ describe('/tasks', function () {
         });
     });
 
+  describe('/suspend/{id}', function () {
+
+        it('should send request successfully', function (done) {
+
+            var response = {
+                "id": "59d79a21f2d7420018f15aaa",
+                "status": "suspended",
+                "message": "Your task has been successfully deactivated."
+            };
+
+            nock('https://api.elastic.io')
+                .post('/v1/tasks/suspend/59d79a21f2d7420018f15aaa')
+                .basicAuth({
+                    user: 'root',
+                    pass: 'secret'
+                })
+                .reply(200, response);
+
+            var result;
+
+            tasks
+                .suspend("59d79a21f2d7420018f15aaa")
+                .then(function (body) {
+                    result = body;
+                })
+                .finally(function () {
+                    expect(result).toEqual(response);
+
+                    done();
+                });
+
+        });
+    });
+
     describe('/create', function () {
 
         it('should send request successfully', function (done) {
