@@ -15,7 +15,7 @@ describe('/resources/storage', function () {
             };
 
             nock('https://api.elastic.io')
-                .post('/v1/resources/storage/signed-url', input)
+                .post('/v2/resources/storage/signed-url', input)
                 .basicAuth({
                     user: 'root',
                     pass: 'secret'
