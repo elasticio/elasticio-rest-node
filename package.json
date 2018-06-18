@@ -5,6 +5,7 @@
     "author": "elastic.io GmbH <info@elastic.io>",
     "engine": "node >=4.1.0",
     "scripts": {
+        "prepublish": "./prepublish.js",
         "pretest": "gulp jscs",
         "test": "gulp test"
     },
