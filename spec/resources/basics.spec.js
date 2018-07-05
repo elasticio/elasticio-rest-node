@@ -41,7 +41,6 @@ describe('Basic use cases', function () {
                 result = body;
             })
             .finally(function () {
-                console.log(result)
                 expect(result).toEqual(response);
 
                 done();
