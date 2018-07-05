@@ -88,7 +88,7 @@ describe('Basic use cases', function () {
 
     it('should strip ending / from API uri coming from env vars', function (done) {
 
-        process.env.ELASTICIO_API_URI = 'https://api.elastic-staging-server.com/';
+        process.env.ELASTICIO_API_URI = 'https://api.elastic-staging-server.com/////';
 
         var client = require("../../lib/client")("root", "secret");
 
