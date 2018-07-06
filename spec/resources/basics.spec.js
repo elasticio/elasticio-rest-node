@@ -86,6 +86,45 @@ describe('Basic use cases', function () {
 
     });
 
+    it('should strip ending / from API uri coming from env vars', function (done) {
+
+        process.env.ELASTICIO_API_URI = 'https://api.elastic-staging-server.com/////';
+
+        var client = require("../../lib/client")("root", "secret");
+
+
+        var response = {
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "test@example.com",
+            "password": "secret",
+            "company": "Doe & Partners"
+        };
+
+        nock('https://api.elastic-staging-server.com')
+            .get('/v1/users/')
+            .basicAuth({
+                user: 'root',
+                pass: 'secret'
+            })
+            .reply(200, response);
+
+        var result;
+
+        client
+            .users
+            .me()
+            .then(function (body) {
+                result = body;
+            })
+            .finally(function () {
+                expect(result).toEqual(response);
+
+                done();
+            });
+
+    });
+
     it('should send request successfully', function (done) {
         var client = require("../../lib/client")("root", "secret");
 
