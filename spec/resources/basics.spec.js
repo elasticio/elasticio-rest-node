@@ -133,7 +133,7 @@ describe('Basic use cases', function () {
         client
             .users
             .delete()
-            .fail(function (e) {
+            .catch(function (e) {
                 result = e;
             })
             .finally(function () {
@@ -165,7 +165,7 @@ describe('Basic use cases', function () {
             .then(function (body) {
                 result = body;
             })
-            .fail(function (e) {
+            .catch(function (e) {
                 error = e;
             })
             .finally(function () {
@@ -196,7 +196,7 @@ describe('Basic use cases', function () {
             .then(function (body) {
                 result = body;
             })
-            .fail(function (e) {
+            .catch(function (e) {
                 error = e;
             })
             .finally(function () {
@@ -208,5 +208,29 @@ describe('Basic use cases', function () {
                 done();
             });
 
+    });
+
+    it('should retry on network error and not retry on HTTP error', done => {
+        const client = require("../../lib/client")("root", "secret");
+
+        nock('https://api.elastic.io')
+            .get('/v1/users/')
+            .once()
+            .replyWithError({code: 'ECONNRESET'})
+            .get('/v1/users/')
+            .once()
+            .reply(401, "Invalid username or secret provided.");
+
+        client
+            .users
+            .me()
+            .then(() => done.fail(new Error('Should fail')))
+            .catch(error => {
+                expect(error).toBeDefined();
+                expect(error.message).toEqual('Invalid username or secret provided.');
+                expect(error.statusCode).toEqual(401);
+
+                done();
+            });
     });
 });

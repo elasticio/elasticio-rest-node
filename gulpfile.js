@@ -2,23 +2,12 @@ var gulp = require('gulp');
 var jasmine = require('gulp-jasmine');
 var istanbul = require('gulp-istanbul');
 var coveralls = require('gulp-coveralls');
-var jscs = require('gulp-jscs');
 
 var paths = {
     code: ['./lib/**/*.js'],
     spec: ['./spec/**/*.spec.js'],
     coverageReport: 'coverage/lcov.info'
 };
-
-gulp.task('jscs', () => {
-    return gulp
-        .src([
-            './lib/**/*.js'
-        ])
-        .pipe(jscs())
-        .pipe(jscs.reporter())
-        .pipe(jscs.reporter('fail'));
-});
 
 gulp.task('jasmine', () => {
     return gulp

@@ -74,7 +74,7 @@ describe('/exec', function () {
 
             exec
                 .schedule(input)
-                .fail(function (e) {
+                .catch(function (e) {
                     result = e;
                 })
                 .finally(function () {
@@ -110,7 +110,7 @@ describe('/exec', function () {
 
             exec
                 .schedule(input)
-                .fail(function (e) {
+                .catch(function (e) {
                     result = e;
                 })
                 .finally(function () {
