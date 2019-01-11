@@ -9,6 +9,9 @@ jobs: # a collection of steps
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
+      - run:
+          name: install-inherits
+          command: 'sudo npm install -g inherits'
       - restore_cache: # special step to restore the dependency cache
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "package-lock.json" }}
