@@ -210,7 +210,7 @@ describe('Basic use cases', function () {
 
     });
 
-    it('should retry on network error and not retry on network error by default', done => {
+    it('should retry on network error and not retry on HTTP error', done => {
         const client = require("../../lib/client")("root", "secret");
 
         nock('https://api.elastic.io')
@@ -229,26 +229,6 @@ describe('Basic use cases', function () {
                 expect(error).toBeDefined();
                 expect(error.message).toEqual('Invalid username or secret provided.');
                 expect(error.statusCode).toEqual(401);
-
-                done();
-            });
-    });
-
-    it('should retry on network error and not retry on network if configured', done => {
-        const client = require("../../lib/client")("root", "secret", { retryOnNetworkError: false });
-
-        nock('https://api.elastic.io')
-            .get('/v1/users/')
-            .once()
-            .replyWithError({code: 'ECONNRESET'});
-
-        client
-            .users
-            .me()
-            .then(() => done.fail(new Error('Should fail')))
-            .catch(error => {
-                expect(error).toBeDefined();
-                expect(error.code).toEqual('ECONNRESET');
 
                 done();
             });
