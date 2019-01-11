@@ -16,6 +16,7 @@
         "lodash": "^3.10.1",
         "natives": "^1.1.6",
         "q": "^1.4.1",
+        "request": "^2.88.0",
         "requestretry": "^3.1.0"
     },
     "devDependencies": {
