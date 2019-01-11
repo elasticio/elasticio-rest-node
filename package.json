@@ -1,29 +1,32 @@
 {
     "name": "elasticio-rest-node",
     "description": "elastic.io REST API client",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "author": "elastic.io GmbH <info@elastic.io>",
     "engines": {
-        "node": "8.1.0"
+        "node": ">=10.15.0"
     },
     "scripts": {
-        "pretest": "gulp jscs",
-        "test": "gulp test"
+        "pretest": "npm run lint",
+        "test": "gulp test",
+        "lint": "./node_modules/.bin/eslint lib/**/*.js"
     },
     "main": "./lib/client.js",
     "dependencies": {
         "lodash": "^3.10.1",
+        "natives": "^1.1.6",
         "q": "^1.4.1",
-        "request": "^2.63.0"
+        "requestretry": "^3.1.0"
     },
     "devDependencies": {
-        "nock": "^9.4.1",
+        "code-quality-js": "1.0.2",
+        "eslint": "^5.12.0",
         "gulp": "3.8.11",
-        "gulp-jasmine": "2.0.0",
-        "gulp-istanbul": "0.6.0",
         "gulp-coveralls": "^0.1.4",
-        "gulp-param": "0.6.3",
+        "gulp-istanbul": "0.6.0",
+        "gulp-jasmine": "2.0.0",
         "gulp-jscs": "~3.0.2",
-        "code-quality-js": "1.0.2"
+        "gulp-param": "0.6.3",
+        "nock": "^9.4.1"
     }
 }
