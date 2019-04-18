@@ -15,6 +15,7 @@ describe('/resources/storage', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v2/resources/storage/signed-url', input)
                 .basicAuth({
                     user: 'root',

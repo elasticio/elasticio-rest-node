@@ -13,6 +13,7 @@ describe('/tasks', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/tasks/start/5602c23e6459bd0500000001')
                 .basicAuth({
                     user: 'root',
@@ -46,6 +47,7 @@ describe('/tasks', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/tasks/stop/5602c23e6459bd0500000001')
                 .basicAuth({
                     user: 'root',
@@ -80,6 +82,7 @@ describe('/tasks', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/tasks/suspend/59d79a21f2d7420018f15aaa')
                 .basicAuth({
                     user: 'root',
@@ -147,6 +150,7 @@ describe('/tasks', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/tasks/', input)
                 .basicAuth({
                     user: 'root',
@@ -179,6 +183,7 @@ describe('/tasks', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .delete('/v1/tasks/54f4be3fe7d5224f91000001')
                 .basicAuth({
                     user: 'root',
@@ -210,6 +215,7 @@ describe('/tasks', function () {
                 };
 
                 nock('https://api.elastic.io')
+                    .matchHeader('Connection', 'Keep-Alive')
                     .get('/v1/tasks/54f4be3fe7d5224f91000001/steps/step_1')
                     .basicAuth({
                         user: 'root',

@@ -24,6 +24,7 @@ describe('/exec', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/exec/schedule', input)
                 .basicAuth({
                     user: 'root',
@@ -63,6 +64,7 @@ describe('/exec', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/exec/schedule', input)
                 .basicAuth({
                     user: 'root',
@@ -99,11 +101,14 @@ describe('/exec', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/exec/schedule', input)
                 .basicAuth({
                     user: 'root',
                     pass: 'secret'
                 })
+                //default retry count
+                .times(3)
                 .reply(500, response);
 
             var result;
@@ -131,6 +136,7 @@ describe('/exec', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/exec/poll/540492e623773659c5000002')
                 .basicAuth({
                     user: 'root',
@@ -173,6 +179,7 @@ describe('/exec', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/exec/poll/540492e623773659c5000002')
                 .basicAuth({
                     user: 'root',

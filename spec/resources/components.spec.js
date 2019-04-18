@@ -29,6 +29,7 @@ describe('/components', function () {
         it('should send request successfully', function (done) {
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/components/mine')
                 .basicAuth({
                     user: 'root',
@@ -57,6 +58,7 @@ describe('/components', function () {
         it('should send request successfully', function (done) {
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/components/public')
                 .basicAuth({
                     user: 'root',
@@ -85,6 +87,7 @@ describe('/components', function () {
         it('should send request successfully', function (done) {
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/components/123456789')
                 .basicAuth({
                     user: 'root',
