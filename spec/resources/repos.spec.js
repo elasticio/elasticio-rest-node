@@ -16,6 +16,7 @@ describe('/repos', function () {
             ];
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/repos/')
                 .basicAuth({
                     user: 'root',
@@ -50,6 +51,7 @@ describe('/repos', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/repos/555c5ade13c2298a9d32fe67')
                 .basicAuth({
                     user: 'root',
@@ -89,6 +91,7 @@ describe('/repos', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/repos/', input)
                 .basicAuth({
                     user: 'root',
@@ -121,6 +124,7 @@ describe('/repos', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .delete('/v1/repos/54982ee6bdf2a2030000000f')
                 .basicAuth({
                     user: 'root',
@@ -154,6 +158,7 @@ describe('/repos', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/repos/555c5ade13c2298a9d32fe67/env/')
                 .basicAuth({
                     user: 'root',
@@ -191,6 +196,7 @@ describe('/repos', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .put('/v1/repos/555c5ade13c2298a9d32fe67/env/', input)
                 .basicAuth({
                     user: 'root',

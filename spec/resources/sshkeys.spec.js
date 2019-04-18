@@ -18,6 +18,7 @@ describe('/sshkeys', function () {
             ];
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/sshkey/')
                 .basicAuth({
                     user: 'root',
@@ -59,6 +60,7 @@ describe('/sshkeys', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/sshkey/', input)
                 .basicAuth({
                     user: 'root',
@@ -91,6 +93,7 @@ describe('/sshkeys', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .delete('/v1/sshkey/54982ee6bdf2a2030000000f')
                 .basicAuth({
                     user: 'root',

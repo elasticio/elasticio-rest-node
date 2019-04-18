@@ -20,6 +20,7 @@ describe('/accounts', function () {
             ];
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/accounts/')
                 .basicAuth({
                     user: 'root',
@@ -58,6 +59,7 @@ describe('/accounts', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/accounts/55083c567aea6f030000001a')
                 .basicAuth({
                     user: 'root',
@@ -101,6 +103,7 @@ describe('/accounts', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .put('/v1/accounts/55083c567aea6f030000001a', input)
                 .basicAuth({
                     user: 'root',
@@ -144,6 +147,7 @@ describe('/accounts', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/accounts/', input)
                 .basicAuth({
                     user: 'root',

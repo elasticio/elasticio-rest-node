@@ -23,6 +23,7 @@ describe('/recipes', function () {
             ];
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/recipes/')
                 .basicAuth({
                     user: 'root',
@@ -58,6 +59,7 @@ describe('/recipes', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/recipes/53d61965a6b9e9183f000001')
                 .basicAuth({
                     user: 'root',
@@ -117,6 +119,7 @@ describe('/recipes', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/recipes/53d61965a6b9e9183f000001', input)
                 .basicAuth({
                     user: 'root',

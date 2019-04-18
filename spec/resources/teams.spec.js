@@ -19,6 +19,7 @@ describe('/teams', function () {
             ];
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/teams/')
                 .basicAuth({
                     user: 'root',
@@ -57,6 +58,7 @@ describe('/teams', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/teams/', input)
                 .basicAuth({
                     user: 'root',

@@ -16,6 +16,7 @@ describe('/users', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .get('/v1/users/')
                 .basicAuth({
                     user: 'root',
@@ -61,6 +62,7 @@ describe('/users', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .post('/v1/users/', input)
                 .basicAuth({
                     user: 'root',
@@ -93,6 +95,7 @@ describe('/users', function () {
             };
 
             nock('https://api.elastic.io')
+                .matchHeader('Connection', 'Keep-Alive')
                 .delete('/v1/users/54f4be3fe7d5224f91000001')
                 .basicAuth({
                     user: 'root',
