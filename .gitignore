@@ -4,4 +4,3 @@ node_modules
 reports
 .DS_Store
 coverage
-spec/support
