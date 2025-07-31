@@ -14,7 +14,7 @@ Documentation is available at http://api.elastic.io/docs/
 
 
 ````js
-var client = require('elasticio-rest-node')('YOUR_EMAIL', 'YOUR_API_KEY');
+const client = require('elasticio-rest-node')('YOUR_EMAIL', 'YOUR_API_KEY');
 ````
 
 

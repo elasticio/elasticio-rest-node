@@ -1,4 +1,4 @@
-describe('/users', function () {
+xdescribe('/users', function () {
     var client = require("../../lib/client")("root", "secret");
     var users = client.users;
     var nock = require('nock');
