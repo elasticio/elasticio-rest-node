@@ -1,10 +1,10 @@
 {
   "name": "elasticio-rest-node",
   "description": "elastic.io REST API client",
-  "version": "2.0.0-dev.1",
+  "version": "2.0.0-dev.2",
   "author": "elastic.io GmbH <info@elastic.io>",
   "engines": {
-    "node": "20.x"
+    "node": ">=12.13.0"
   },
   "scripts": {
     "pretest": "npm run lint",
