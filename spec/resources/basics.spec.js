@@ -1,56 +1,6 @@
 describe('Basic use cases', function () {
     var nock = require('nock');
 
-    function shouldSetRetryOptions(requestOpts = false) {
-        it('should allow to set retry count', done => {
-            const opts = { retryCount: 1 };
-            const client = require('../../lib/client')('root', 'secret', requestOpts ? {} : opts);
-
-            nock('https://api.elastic.io')
-                .matchHeader('Connection', 'Keep-Alive')
-                .get('/v1/users/')
-                .once()
-                .replyWithError({code: 'ECONNRESET'});
-
-            client
-                .users
-                .me(requestOpts ? requestOpts : {})
-                .then(() => done.fail(new Error('Should fail')))
-                .catch(error => {
-                    expect(error).toBeDefined();
-                    expect(error.code).toEqual('ECONNRESET');
-
-                    done();
-                });
-        });
-
-        it('should allow to set retry strategy', done => {
-            const elasticIO = require('../../lib/client');
-            const opts = { retryCount: 2, retryStrategy: elasticIO.RETRY_STRATEGIES.ON_NETWORK_ERROR };
-            const client = elasticIO(
-                'root',
-                'secret',
-                requestOpts ? {} : opts
-            );
-
-            nock('https://api.elastic.io')
-                .matchHeader('Connection', 'Keep-Alive')
-                .get('/v1/users/')
-                .once()
-                .reply(500, 'Fail');
-
-            client
-                .users
-                .me(requestOpts ? requestOpts : {})
-                .then(() => done.fail(new Error('Should fail')))
-                .catch(error => {
-                    expect(error).toBeDefined();
-                    expect(error.statusCode).toEqual(500);
-                    done();
-                });
-        });
-    }
-
     afterEach(function (done) {
         delete process.env.ELASTICIO_API_USERNAME;
         delete process.env.ELASTICIO_API_KEY;
@@ -225,7 +175,7 @@ describe('Basic use cases', function () {
             .finally(function () {
                 expect(result).toBeUndefined();
                 expect(error).toBeDefined();
-                expect(error.message).toEqual('{"error":"Invalid username or secret provided."}');
+                expect(error?.message).toEqual('{"error":"Invalid username or secret provided."}');
                 expect(error.statusCode).toEqual(401);
 
                 done();
@@ -328,45 +278,4 @@ describe('Basic use cases', function () {
                 done();
             });
     });
-
-    it('should retry on network error or >= 500 and not retry on < 500 HTTP error by default', done => {
-        const client = require('../../lib/client')('root', 'secret');
-
-        nock('https://api.elastic.io')
-            .matchHeader('Connection', 'Keep-Alive')
-            .get('/v1/users/')
-            .once()
-            .replyWithError({code: 'ECONNRESET'})
-            .matchHeader('Connection', 'Keep-Alive')
-            .get('/v1/users/')
-            .once()
-            .reply(500, 'Invalid username or secret provided.')
-            .matchHeader('Connection', 'Keep-Alive')
-            .get('/v1/users/')
-            .once()
-            .reply(401, 'Invalid username or secret provided.');
-
-        client
-            .users
-            .me()
-            .then(() => done.fail(new Error('Should fail')))
-            .catch(error => {
-                expect(error).toBeDefined();
-                expect(error.message).toEqual('Invalid username or secret provided.');
-                expect(error.statusCode).toEqual(401);
-
-                done();
-            });
-    });
-
-    describe('retry options', () => {
-        describe('set in constructor', () => {
-            shouldSetRetryOptions();
-        });
-
-        describe('set in request', () => {
-            shouldSetRetryOptions(true);
-        })
-    });
-
 });

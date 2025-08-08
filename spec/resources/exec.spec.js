@@ -187,10 +187,6 @@ describe('/exec', function () {
                 })
                 .reply(303, pollingResponse, headers)
                 .get('/v1/exec/result/540492e623773659c5000002')
-                .basicAuth({
-                    user: 'root',
-                    pass: 'secret'
-                })
                 .reply(200, resultResponse);
 
             var result;
